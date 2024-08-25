@@ -25,26 +25,6 @@ export class WalletController {
   }
 
 
-   // Add money to wallet of a user
-   @Patch(':userId/:walletId/add-money')
-   @HttpCode(HttpStatus.OK)
-   async addMoney(
-     @Param('userId') userId: string,
-     @Param('walletId') walletId: string,
-     @Body('amount') amount: number
-   ) {
-     try {
-         if (!userId || !walletId || !amount) {
-             throw new Error('User ID, Wallet ID, and Amount are required');
-         }
-         const updatedWallet = await this.walletService.addMoneyToWallet(userId, walletId, amount);
-         return { success: true, message: `Money added successfully your balance is ${updatedWallet.balance}`, status: HttpStatus.OK };
-     } catch (error) {
-         return { success: false, message: error.message, status: HttpStatus.BAD_REQUEST };
-     }
-   }
-
- 
    //user profile information
    @Get(':id')
     @HttpCode(HttpStatus.OK)
@@ -55,6 +35,21 @@ export class WalletController {
             };
         } catch (error) {
             return { success: false, message: error.message, status: HttpStatus.BAD_REQUEST };
+        }
+    }
+
+    //get wallet details
+    @Get('/details/:walletId/:userId')
+    @HttpCode(HttpStatus.OK)
+    async getWalletDetails(
+        @Param('walletId') walletId: string,
+        @Param('userId') userId: string
+    ) {
+        try {
+        const walletDetails = await this.walletService.getWalletDetails(walletId, userId);
+        return { success: true, data: walletDetails, status: HttpStatus.OK };
+        } catch (error) {
+        return { success: false, message: error.message, status: HttpStatus.NOT_FOUND };
         }
     }
 }
