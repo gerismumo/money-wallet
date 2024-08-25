@@ -7,9 +7,9 @@ export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
   //create new wallet
-  @Post(':id')
+  @Post('/add/:userId')
   @HttpCode(HttpStatus.OK)
-  async createWallet(@Param('id') userId: string, @Body('name') walletName: string) {
+  async createWallet(@Param('userId') userId: string, @Body('name') walletName: string) {
     try {
 
         if(!userId || !walletName) {
@@ -25,20 +25,7 @@ export class WalletController {
   }
 
 
-   //user profile information
-   @Get(':id')
-    @HttpCode(HttpStatus.OK)
-    async getUserProfile(@Param('id') userId: string) {
-        try {
-            const profile = await this.walletService.getUserProfile(userId);
-            return { success: true, data: profile, status: HttpStatus.OK,
-            };
-        } catch (error) {
-            return { success: false, message: error.message, status: HttpStatus.BAD_REQUEST };
-        }
-    }
-
-    //get wallet details
+    //get wallet details by userid
     @Get('/details/:walletId/:userId')
     @HttpCode(HttpStatus.OK)
     async getWalletDetails(

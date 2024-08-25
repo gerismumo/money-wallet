@@ -1,11 +1,12 @@
-import { Controller, Post, Body, BadRequestException, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, HttpCode, HttpStatus, Get, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 
-@Controller('auth')
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('signup')
+  @Post('/auth/signup')
+
   @HttpCode(HttpStatus.OK)
   async signUp(
     @Body('firstName') firstName: string,
@@ -27,7 +28,7 @@ export class UserController {
     
   }
 
-  @Post('signin')
+  @Post('/auth/signin')
   @HttpCode(HttpStatus.OK)
   async signIn(
     @Body('email') email: string,
@@ -46,4 +47,21 @@ export class UserController {
     }
     ;
   }
+
+
+  //user profile information
+  @Get('/profile/:id')
+
+  @HttpCode(HttpStatus.OK)
+  async getUserProfile(@Param('id') userId: string) {
+      try {
+          const profile = await this.userService.getUserProfile(userId);
+          return { success: true, data: profile, status: HttpStatus.OK,
+          };
+      } catch (error) {
+          return { success: false, message: error.message, status: HttpStatus.BAD_REQUEST };
+      }
+  }
+
+
 }

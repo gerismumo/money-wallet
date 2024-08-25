@@ -41,4 +41,34 @@ export class UserService {
 
     return user;
   }
+
+  //get user profile
+  async getUserProfile(userId: string): Promise<any> {
+    const user = await this.userModel.findById(userId).populate('wallets');
+
+    if (!user) {
+        throw new Error('User not found');
+    }
+
+
+    const overallBalance = user.wallets.reduce((total, wallet: any) => total + wallet.balance, 0);
+
+    // profile summary
+    const profileSummary = {
+        user: {
+            id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+        },
+        overallBalance,
+        wallets: user.wallets.map((wallet: any) => ({
+            id: wallet._id,
+            name: wallet.name,
+            balance: wallet.balance,
+        })),
+    };
+
+    return profileSummary;
+}
 }
