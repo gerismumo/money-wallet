@@ -11,6 +11,7 @@ export class WalletService {
         @InjectModel(User.name) private readonly userModel: Model<User>
     ) {}
 
+    //create new wallet
     async createWallet(walletName: string, userId: string): Promise<any> {
 
         const newWallet = new this.walletModel({
@@ -37,4 +38,55 @@ export class WalletService {
         // Return the saved wallet
         return savedWallet;
     }
+
+    //add money to user's wallet
+    async addMoneyToWallet(userId: string, walletId: string, amount: number): Promise<any> {
+
+        if (!Number.isInteger(amount) || amount <= 0) {
+            throw new Error('Amount must be a positive integer');
+        }
+
+        const wallet = await this.walletModel.findOne({ _id: walletId, user: userId });
+
+        if (!wallet) {
+            throw new Error('Wallet not found');
+        }
+
+        wallet.balance += amount;
+
+        const updatedWallet = await wallet.save();
+
+        return updatedWallet;
+    }
+
+    //
+    async getUserProfile(userId: string): Promise<any> {
+        const user = await this.userModel.findById(userId).populate('wallets');
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+    
+
+        const overallBalance = user.wallets.reduce((total, wallet: any) => total + wallet.balance, 0);
+    
+        // profile summary
+        const profileSummary = {
+            user: {
+                id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+            },
+            overallBalance,
+            wallets: user.wallets.map((wallet: any) => ({
+                id: wallet._id,
+                name: wallet.name,
+                balance: wallet.balance,
+            })),
+        };
+    
+        return profileSummary;
+    }
+    
 }
