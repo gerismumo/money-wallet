@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserModule } from './user/app.module';
+import { UserModule } from './user/user.module';
 import { WalletModule } from './wallets/wallet.module';
 import { TransactionsModule } from './transactions/transaction.module';
 
