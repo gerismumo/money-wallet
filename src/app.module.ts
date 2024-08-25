@@ -5,12 +5,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { WalletModule } from './wallets/wallet.module';
 import { TransactionsModule } from './transactions/transaction.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, 
+    }),
     MongooseModule.forRootAsync({
       useFactory: () => ({
-        uri: 'mongodb://127.0.0.1:27017/moneywallet',
+        uri:  process.env.MONGO_URI,
       }),
     }),
     UserModule,

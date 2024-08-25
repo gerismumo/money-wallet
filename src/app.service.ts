@@ -62,7 +62,7 @@ export class AppService {
           <p>Welcome to the Money Tracker API documentation. This API allows users to manage multiple wallets, track their expenses and incomes, and view detailed information about their finances.</p>
 
           <h2>Prerequisites</h2>
-          <p>Before using the APIs, ensure that you have MongoDB connectivity properly configured. The application requires a MongoDB instance to store and manage user data, wallets, and transactions.</p>
+          <p>Before using the APIs, ensure that you have MongoDB connectivity properly configured in .env file. The application requires a MongoDB instance to store and manage user data, wallets, and transactions.</p>
           
           <h2>User Flow</h2>
           <ul>
