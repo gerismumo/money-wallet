@@ -12,6 +12,7 @@ import { UserModule } from "src/user/user.module";
     ],
     providers: [WalletService],
     controllers: [WalletController],
+    exports: [MongooseModule]
 })
 
 export class WalletModule {}
