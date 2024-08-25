@@ -8,6 +8,7 @@ import { User } from './user.schema';
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
+  //sign up user
   async signUp(firstName: string, lastName: string, userName: string, email: string, password: string): Promise<User> {
     const existingUser = await this.userModel.findOne({ email });
 
@@ -26,6 +27,7 @@ export class UserService {
     return newUser.save();
   }
 
+  //sign in user
   async signIn(email: string, password: string): Promise<User> {
     const user = await this.userModel.findOne({ email });
 
@@ -42,7 +44,7 @@ export class UserService {
     return user;
   }
 
-  //get user profile
+  //get user profile function
   async getUserProfile(userId: string): Promise<any> {
     const user = await this.userModel.findById(userId).populate('wallets');
 

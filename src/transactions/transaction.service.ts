@@ -13,6 +13,7 @@ export class TransactionService {
         @InjectModel(Transaction.name) private readonly transactionModel: Model<Transaction>,
     ) {}
 
+    //user transactions function
     async addTransaction(userId: string, walletId: string, type: 'income' | 'expense', amount: number, description: string): Promise<any> {
         if (!Number.isInteger(amount) || amount <= 0) {
             throw new Error('Amount must be greater than zero or valid');

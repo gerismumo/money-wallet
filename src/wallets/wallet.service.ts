@@ -42,7 +42,7 @@ export class WalletService {
     }
 
     
-    //user wallet details
+    //get user wallet details
     async getWalletDetails(walletId: string, userId: string): Promise<any> {
         const wallet = await this.walletModel.findOne({ _id: walletId, user: userId }).populate('transactions');
         

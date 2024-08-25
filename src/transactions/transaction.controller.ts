@@ -6,6 +6,7 @@ import { TransactionService } from "./transaction.service";
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
+  //users transactions(expenses / income)
   @Post(':walletId')
   @HttpCode(HttpStatus.OK)
   async addTransaction(

@@ -6,7 +6,7 @@ import { WalletService } from "./wallet.service";
 export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
-  //create new wallet
+  //create new wallet(user)
   @Post('/add/:userId')
   @HttpCode(HttpStatus.OK)
   async createWallet(@Param('userId') userId: string, @Body('name') walletName: string) {

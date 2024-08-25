@@ -5,8 +5,8 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  //sign up user
   @Post('/auth/signup')
-
   @HttpCode(HttpStatus.OK)
   async signUp(
     @Body('firstName') firstName: string,
@@ -28,6 +28,7 @@ export class UserController {
     
   }
 
+  //sign in user
   @Post('/auth/signin')
   @HttpCode(HttpStatus.OK)
   async signIn(
@@ -49,7 +50,7 @@ export class UserController {
   }
 
 
-  //user profile information
+  //get user profile information
   @Get('/profile/:id')
 
   @HttpCode(HttpStatus.OK)
