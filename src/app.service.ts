@@ -157,7 +157,7 @@ export class AppService {
           </div>
           <p>Use the above endpoints to interact with the Money Tracker API and manage your wallets, expenses, and incomes effectively.</p>
       </body>
-        </html>
+      </html>
     `;
   }
 }
