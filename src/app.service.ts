@@ -153,6 +153,27 @@ export class AppService {
               <h3>5. Wallet Details</h3>
               <p><strong>Endpoint:</strong> <code>GET /wallet/details/:walletId/:userId</code></p>
               <p><strong>Description:</strong> Retrieve detailed information about a specific wallet, including its balance and transactions.</p>
+              <p><strong>Response Example:</strong></p>
+              <pre>
+                {
+                  "walletName": "",
+                  "balance": ,
+                  "transactions": [
+                      {
+                          "amount": ,
+                          "type": "",
+                          "description": "",
+                          "date": ""
+                      },
+                      {
+                          "amount": ,
+                          "type": "",
+                          "description": "",
+                          "date": ""
+                      },
+                  ]
+                },
+              </pre>
               <p><strong>Parameters:</strong> <code>:walletId</code> - The ID of the wallet being viewed.<br><code>:userId</code> - The ID of the user who owns the wallet.</p>
           </div>
           <p>Use the above endpoints to interact with the Money Tracker API and manage your wallets, expenses, and incomes effectively.</p>
