@@ -112,7 +112,7 @@ export class AppService {
             <pre>
               {
                 "user": {
-                    "id": "66cb45b753e1094e38fe28bb",
+                    "id": "",
                     "firstName": "",
                     "lastName": "",
                     "email": ""
