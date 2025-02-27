@@ -58,14 +58,12 @@ export class UserService {
     // profile summary
     const profileSummary = {
         user: {
-            id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
         },
         overallBalance,
         wallets: user.wallets.map((wallet: any) => ({
-            id: wallet._id,
             name: wallet.name,
             balance: wallet.balance,
         })),
